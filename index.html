@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Floor-Ready Technical English — Bootcamp for Line Supervisors</title>
+<meta name="description" content="8-week technical English + Industry 4.0 program for line supervisors in the Bajío corridor.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#062E44; --steel:#0E4F6E; --cyan:#1FB6D6; --ice:#EAF7FB;
+    --ice-2:#F6FBFD; --ink:#0E1C24; --slate:#4C606B; --line:#CFE8EF;
+    --white:#FFFFFF; --radius:10px;
+    --font-display:'Archivo', system-ui, sans-serif;
+    --font-body:'IBM Plex Sans', system-ui, sans-serif;
+  }
+  :root:not([data-theme="light"]) { }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ice:#0B222E; --ice-2:#0A1E29; --ink:#E8F3F6; --slate:#9FB6BF; --line:#1C3A47; --white:#0F2733;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ice:#0B222E; --ice-2:#0A1E29; --ink:#E8F3F6; --slate:#9FB6BF; --line:#1C3A47; --white:#0F2733;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth; scroll-padding-top:calc(72px + env(safe-area-inset-top,0px));}
+  body{
+    margin:0; background:var(--ice-2); color:var(--ink); font-family:var(--font-body);
+    padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{max-width:100%; display:block;}
+  a{color:inherit;}
+  .wrap{max-width:1120px; margin:0 auto; padding-left:24px; padding-right:24px;}
+  :focus-visible{outline:2px solid var(--cyan); outline-offset:3px;}
+  @media (prefers-reduced-motion: reduce){ *{animation-duration:.001ms !important; transition-duration:.001ms !important;} }
+
+  /* ---- nav ---- */
+  header.site{
+    position:sticky; top:0; z-index:40; background:rgba(6,46,68,.94); backdrop-filter:blur(6px);
+    padding-top:env(safe-area-inset-top,0px);
+  }
+  .nav{display:flex; align-items:center; justify-content:space-between; padding:16px 24px; max-width:1120px; margin:0 auto;}
+  .brand{display:flex; align-items:center; gap:10px; color:#fff; text-decoration:none;}
+  .brand .mark{width:30px; height:30px; flex:none;}
+  .brand span{font-family:var(--font-display); font-weight:700; font-size:15px; letter-spacing:.01em;}
+  nav.links{display:flex; gap:28px;}
+  nav.links a{color:#CFE8EF; text-decoration:none; font-size:14.5px; font-weight:500;}
+  nav.links a:hover{color:#fff;}
+  .nav-cta{display:none;}
+  @media (min-width:760px){ .nav-cta{display:inline-flex;} }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; padding:11px 20px; border-radius:8px;
+    font-family:var(--font-body); font-weight:600; font-size:14.5px; text-decoration:none; border:1px solid transparent;
+    cursor:pointer;
+  }
+  .btn-primary{background:var(--cyan); color:#04222E;}
+  .btn-primary:hover{background:#3fc6e0;}
+  .btn-ghost{background:transparent; color:#fff; border-color:rgba(255,255,255,.35);}
+  .btn-ghost:hover{border-color:#fff;}
+  .menu-toggle{display:inline-flex; background:none; border:none; color:#fff; padding:6px;}
+  @media (min-width:760px){ .menu-toggle{display:none;} nav.links{display:flex;} }
+  @media (max-width:759px){ nav.links{display:none;} }
+
+  /* ---- hero ---- */
+  .hero{background:linear-gradient(180deg,var(--navy) 0%, #073349 100%); color:#fff; position:relative; overflow:hidden;}
+  .hero-grid{
+    max-width:1120px; margin:0 auto; padding:64px 24px 72px; display:grid; gap:48px;
+    grid-template-columns:1fr; align-items:center;
+  }
+  @media (min-width:900px){ .hero-grid{grid-template-columns:1.05fr .95fr; padding:88px 24px 96px;} }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px; font-size:13px; font-weight:600; color:#8FD9EA;
+    background:rgba(31,182,214,.12); border:1px solid rgba(31,182,214,.35); padding:6px 12px; border-radius:100px;
+    margin-bottom:22px;
+  }
+  .eyebrow .dot{width:6px; height:6px; border-radius:50%; background:#1FB6D6;}
+  h1{
+    font-family:var(--font-display); font-weight:900; letter-spacing:-.01em;
+    font-size:clamp(32px, 5vw, 52px); line-height:1.06; margin:0 0 22px;
+  }
+  h1 em{font-style:normal; color:#7FD8EC;}
+  .hero p.lede{font-size:17px; line-height:1.6; color:#CFE8EF; max-width:46ch; margin:0 0 32px;}
+  .hero-ctas{display:flex; flex-wrap:wrap; gap:14px; margin-bottom:36px;}
+  .hero-stats{display:flex; gap:32px; flex-wrap:wrap; border-top:1px solid rgba(255,255,255,.15); padding-top:22px;}
+  .stat b{display:block; font-family:var(--font-display); font-size:24px; color:#fff;}
+  .stat span{font-size:12.5px; color:#9FC4D4;}
+
+  /* hero visual: schematic */
+  .schematic{width:100%; height:auto;}
+  .schem-card{
+    background:rgba(255,255,255,.04); border:1px solid rgba(143,217,234,.25); border-radius:14px; padding:20px;
+  }
+
+  /* ---- section shell ---- */
+  section{padding:72px 0;}
+  .section-head{max-width:60ch; margin-bottom:36px;}
+  .kicker{font-size:13px; font-weight:600; color:var(--cyan); margin:0 0 10px;}
+  h2{font-family:var(--font-display); font-weight:700; font-size:clamp(24px,3.2vw,32px); line-height:1.15; margin:0 0 14px; letter-spacing:-.005em;}
+  p.dek{color:var(--slate); font-size:15.5px; line-height:1.65; margin:0;}
+
+  /* gap quote */
+  .gap-block{
+    background:var(--ice); border-left:3px solid var(--cyan); border-radius:0 var(--radius) var(--radius) 0;
+    padding:28px 32px; font-size:16.5px; line-height:1.65; color:var(--ink); max-width:74ch;
+  }
+  .gap-block b{color:var(--navy);}
+
+  /* program: 3 phase blocks, not identical cards */
+  .phases{display:grid; gap:20px; grid-template-columns:1fr;}
+  @media (min-width:820px){ .phases{grid-template-columns:1fr 1fr 1fr;} }
+  .phase{border-top:3px solid var(--line); padding-top:18px;}
+  .phase.active{border-top-color:var(--cyan);}
+  .phase .weeks{font-family:var(--font-display); font-size:13px; font-weight:700; color:var(--cyan); margin-bottom:8px;}
+  .phase h3{font-family:var(--font-display); font-size:19px; margin:0 0 10px;}
+  .phase ul{margin:0; padding:0; list-style:none;}
+  .phase li{font-size:14.5px; line-height:1.6; color:var(--slate); padding:6px 0; border-bottom:1px solid var(--line);}
+  .phase li:last-child{border-bottom:none;}
+
+  /* outcomes two col */
+  .outcomes{display:grid; gap:14px; grid-template-columns:1fr;}
+  @media (min-width:700px){ .outcomes{grid-template-columns:1fr 1fr;} }
+  .outcome{display:flex; gap:14px; align-items:flex-start;}
+  .outcome .ico{flex:none; width:34px; height:34px; border-radius:8px; background:var(--ice); display:flex; align-items:center; justify-content:center;}
+  .outcome p{margin:0; font-size:14.5px; line-height:1.55; color:var(--ink); padding-top:6px;}
+
+  /* who for */
+  .who{background:var(--ice); border-radius:16px; padding:40px; display:grid; gap:28px; grid-template-columns:1fr;}
+  @media (min-width:820px){ .who{grid-template-columns:1.2fr .8fr; padding:48px;} }
+  .who-tags{display:flex; flex-wrap:wrap; gap:10px;}
+  .tag{background:var(--white); border:1px solid var(--line); border-radius:100px; padding:8px 14px; font-size:13.5px; font-weight:500; color:var(--steel);}
+
+  /* pilot CTA */
+  .pilot{
+    background:linear-gradient(135deg, var(--cyan), #17A0BD); border-radius:16px; padding:44px; color:#04222E;
+    display:grid; gap:24px; grid-template-columns:1fr; align-items:center;
+  }
+  @media (min-width:820px){ .pilot{grid-template-columns:1.3fr .7fr;} }
+  .pilot h2{color:#04222E;}
+  .pilot p{color:#0A3644; font-size:15.5px; line-height:1.6;}
+  .pilot .btn-primary{background:#04222E; color:#fff;}
+  .pilot .btn-primary:hover{background:#0A3644;}
+
+  /* footer */
+  footer{background:var(--navy); color:#CFE8EF; padding:56px 0 32px;}
+  .foot-grid{display:grid; gap:36px; grid-template-columns:1fr; margin-bottom:40px;}
+  @media (min-width:760px){ .foot-grid{grid-template-columns:1.2fr .8fr .8fr;} }
+  footer h4{color:#fff; font-family:var(--font-display); font-size:14px; margin:0 0 14px;}
+  footer .brand span{color:#fff;}
+  footer p.small{font-size:14px; line-height:1.6; color:#9FC4D4; max-width:36ch;}
+  .contact-list{list-style:none; margin:0; padding:0;}
+  .contact-list li{margin-bottom:10px; font-size:14.5px;}
+  .contact-list a{text-decoration:none; color:#CFE8EF;}
+  .contact-list a:hover{color:#fff;}
+  #social-links{display:flex; gap:10px; flex-wrap:wrap;}
+  #social-links a{
+    width:38px; height:38px; border-radius:8px; background:rgba(255,255,255,.08); display:flex;
+    align-items:center; justify-content:center; text-decoration:none; border:1px solid rgba(255,255,255,.12);
+  }
+  #social-links a:hover{background:var(--cyan);}
+  #social-links svg{width:17px; height:17px; fill:#fff;}
+  .foot-bottom{border-top:1px solid rgba(255,255,255,.12); padding-top:22px; font-size:13px; color:#7FA3B4; display:flex; flex-wrap:wrap; gap:8px 18px; justify-content:space-between;}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="nav">
+    <a class="brand" href="#top">
+      <svg class="mark" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="7" fill="#1FB6D6"/><path d="M8 20L14 10L18 16L24 8" stroke="#04222E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Floor-Ready English</span>
+    </a>
+    <nav class="links">
+      <a href="#program">Program</a>
+      <a href="#outcomes">Outcomes</a>
+      <a href="#who">Who it's for</a>
+      <a href="#pilot">Pricing</a>
+    </nav>
+    <a class="btn btn-primary nav-cta" id="nav-cta" href="#pilot">Book the diagnostic</a>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-expanded="false">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h16" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <nav class="links" id="mobile-links" style="display:none; flex-direction:column; gap:0; padding:0 24px 18px;">
+    <a href="#program" style="padding:10px 0;">Program</a>
+    <a href="#outcomes" style="padding:10px 0;">Outcomes</a>
+    <a href="#who" style="padding:10px 0;">Who it's for</a>
+    <a href="#pilot" style="padding:10px 0;">Pricing</a>
+  </nav>
+</header>
+
+<main id="top">
+  <section class="hero" style="padding:0;">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow"><span class="dot"></span>Bajío Corridor · León / Celaya / Silao / Querétaro</span>
+        <h1>Your supervisors, fluent in the language your floor <em>already runs on.</em></h1>
+        <p class="lede">An 8-week technical English + Industry 4.0 program built entirely around your own manuals, dashboards, and SOPs — not a generic classroom course.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#pilot">Book the free diagnostic</a>
+          <a class="btn btn-ghost" href="#program">See the 8-week plan</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><b>8 weeks</b><span>90 min / day, 4 days a week</span></div>
+          <div class="stat"><b>On your floor</b><span>or a room nearby</span></div>
+          <div class="stat"><b>Zero downtime</b><span>runs around shift schedules</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="schem-card">
+          <svg class="schematic" viewBox="0 0 420 340" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                <path d="M20 0H0V20" fill="none" stroke="rgba(143,217,234,.12)" stroke-width="1"/>
+              </pattern>
+            </defs>
+            <rect width="420" height="340" fill="url(#grid)"/>
+            <!-- connecting lines -->
+            <path d="M70 60 L200 60 L200 130" stroke="#1FB6D6" stroke-width="1.5" fill="none" opacity=".55"/>
+            <path d="M70 170 L150 170 L150 130 L200 130" stroke="#1FB6D6" stroke-width="1.5" fill="none" opacity=".55"/>
+            <path d="M70 260 L150 260 L150 200 L200 200 L200 130" stroke="#1FB6D6" stroke-width="1.5" fill="none" opacity=".55"/>
+            <path d="M200 130 L330 130 L330 190" stroke="#7FD8EC" stroke-width="1.5" fill="none" opacity=".7"/>
+            <!-- nodes -->
+            <g font-family="IBM Plex Sans" font-size="11" fill="#CFE8EF">
+              <circle cx="60" cy="60" r="5" fill="#1FB6D6"/><text x="72" y="64">SOP manual</text>
+              <circle cx="60" cy="170" r="5" fill="#1FB6D6"/><text x="72" y="174">Equipment spec</text>
+              <circle cx="60" cy="260" r="5" fill="#1FB6D6"/><text x="72" y="264">Quality report</text>
+              <circle cx="200" cy="130" r="7" fill="#04222E" stroke="#7FD8EC" stroke-width="2"/>
+              <text x="176" y="112" fill="#7FD8EC" font-weight="600">Lesson</text>
+            </g>
+            <!-- output gauge -->
+            <g transform="translate(330,190)">
+              <circle r="46" fill="rgba(255,255,255,.04)" stroke="rgba(143,217,234,.3)"/>
+              <path d="M0,0 L0,-46" stroke="#7FD8EC" stroke-width="2" transform="rotate(38)"/>
+              <circle r="3.5" fill="#7FD8EC"/>
+              <text x="0" y="66" text-anchor="middle" font-family="IBM Plex Sans" font-size="11" fill="#9FC4D4">Shift handoff, en inglés</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="section-head">
+      <p class="kicker">The gap</p>
+    </div>
+    <div class="gap-block">
+      <b>Your best supervisors can run the line</b> — but they can't read the German engineer's spec sheet, follow the automation dashboard, or explain a defect on a call with a U.S. auditor. That gap slows every audit, every handoff, every escalation.
+    </div>
+  </section>
+
+  <section class="wrap" id="program">
+    <div class="section-head">
+      <p class="kicker">The program</p>
+      <h2>Three phases, eight weeks, zero generic textbook English.</h2>
+      <p class="dek">Every lesson is built from a document your plant already uses.</p>
+    </div>
+    <div class="phases">
+      <div class="phase active">
+        <div class="weeks">Weeks 1–4</div>
+        <h3>Foundation</h3>
+        <ul>
+          <li>Technical vocabulary from your own manuals</li>
+          <li>Reading dashboards, work orders, spec sheets</li>
+          <li>Weekly comprehension checks against real documents</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="weeks">Weeks 5–6</div>
+        <h3>Application</h3>
+        <ul>
+          <li>Spoken English for shift handoffs</li>
+          <li>Role-play: audits, escalations, quality calls</li>
+          <li>Real-scenario vocabulary drills</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="weeks">Weeks 7–8</div>
+        <h3>Proof</h3>
+        <ul>
+          <li>Supervisors present a real production issue in English</li>
+          <li>Mock foreign-engineer panel review</li>
+          <li>Per-supervisor skills scorecard delivered to leadership</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" id="outcomes">
+    <div class="section-head">
+      <p class="kicker">What you get</p>
+      <h2>Not a training credential. A documented, promotable skill.</h2>
+    </div>
+    <div class="outcomes">
+      <div class="outcome">
+        <div class="ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#1FB6D6" stroke-width="2.2" stroke-linecap="round"/></svg></div>
+        <p>Supervisors read equipment manuals and automation dashboards independently.</p>
+      </div>
+      <div class="outcome">
+        <div class="ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#1FB6D6" stroke-width="2.2" stroke-linecap="round"/></svg></div>
+        <p>Faster, clearer shift handoffs and audit responses.</p>
+      </div>
+      <div class="outcome">
+        <div class="ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#1FB6D6" stroke-width="2.2" stroke-linecap="round"/></svg></div>
+        <p>Fewer miscommunications with foreign technical staff and clients.</p>
+      </div>
+      <div class="outcome">
+        <div class="ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#1FB6D6" stroke-width="2.2" stroke-linecap="round"/></svg></div>
+        <p>A skills scorecard plant leadership can use for real promotion decisions.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" id="who">
+    <div class="who">
+      <div>
+        <p class="kicker">Who this is for</p>
+        <h2>Suppliers where the floor is the bottleneck.</h2>
+        <p class="dek">Automotive and aerospace Tier-1/Tier-2 suppliers in the Bajío corridor that have recently added automated equipment, foreign technical staff, or foreign clients — and whose supervisors are standing between the equipment and the answer.</p>
+      </div>
+      <div class="who-tags">
+        <span class="tag">Automotive Tier-1 / Tier-2</span>
+        <span class="tag">Aerospace suppliers</span>
+        <span class="tag">Recent plant expansion</span>
+        <span class="tag">New automated lines</span>
+        <span class="tag">Foreign technical staff</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" id="pilot">
+    <div class="pilot">
+      <div>
+        <h2>Start with a no-risk diagnostic.</h2>
+        <p>A free 45-minute session with 3 of your supervisors — no cost, no commitment — so you see exactly where the gaps are before deciding anything. The first cohort is priced to prove results, not to maximize margin.</p>
+      </div>
+      <div>
+        <a class="btn btn-primary" id="pilot-cta" href="#">Book the diagnostic</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="#top" style="margin-bottom:14px; display:flex;">
+          <svg class="mark" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="7" fill="#1FB6D6"/><path d="M8 20L14 10L18 16L24 8" stroke="#04222E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span></span>
+        </a>
+        <p class="small" id="foot-tagline"></p>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul class="contact-list" id="contact-list"></ul>
+      </div>
+      <div>
+        <h4>Follow</h4>
+        <div id="social-links"></div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span id="foot-location"></span>
+      <span id="foot-year"></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   CONFIG — edit everything here. Nothing else in this file
+   needs to change to relaunch this page for a new contact,
+   phone number, or set of social links.
+   ============================================================ */
+const CONFIG = {
+  brand: {
+    name: "Floor-Ready Technical English",
+    tagline: "8-week technical English + Industry 4.0 program for line supervisors in the Bajío corridor.",
+    location: "Bajío Corridor — León · Celaya · Silao · Querétaro"
+  },
+  contact: {
+    name: "[Your Name]",
+    phone: "+52 000 000 0000",
+    email: "you@example.com",
+    // used for the WhatsApp button — digits only, country code first, no + or spaces
+    whatsappNumber: "520000000000",
+    whatsappMessage: "Hi, I'd like to book the free diagnostic session."
+  },
+  // Add, remove, or reorder entries freely. Supported platform keys:
+  // linkedin, whatsapp, instagram, facebook, x, email, phone, tiktok, youtube
+  social: [
+    { platform: "linkedin",  url: "https://linkedin.com/in/your-profile" },
+    { platform: "whatsapp",  url: "https://wa.me/520000000000" },
+    { platform: "instagram", url: "https://instagram.com/your-handle" },
+    { platform: "email",     url: "mailto:you@example.com" }
+  ]
+};
+/* ============================================================ */
+
+const ICONS = {
+  linkedin: '<svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 8.98h4v12H3v-12zm7 0h3.8v1.64h.05c.53-.98 1.83-2 3.77-2 4.03 0 4.78 2.5 4.78 5.75v6.6h-4v-5.86c0-1.4-.03-3.2-1.98-3.2-1.98 0-2.28 1.5-2.28 3.1v5.96h-4v-12z"/></svg>',
+  whatsapp: '<svg viewBox="0 0 24 24"><path d="M12.04 2C6.55 2 2.08 6.44 2.08 11.9c0 1.87.52 3.62 1.42 5.13L2 22l5.13-1.46a9.9 9.9 0 004.9 1.29h.01c5.5 0 9.96-4.44 9.96-9.9C21.99 6.44 17.53 2 12.04 2zm0 18.08a8.2 8.2 0 01-4.18-1.14l-.3-.18-3.1.88.83-3.02-.2-.31a8.05 8.05 0 01-1.25-4.4c0-4.46 3.65-8.09 8.2-8.09 2.19 0 4.25.85 5.8 2.4a8.02 8.02 0 012.39 5.7c0 4.47-3.65 8.16-8.19 8.16zm4.49-6.13c-.24-.12-1.44-.7-1.66-.79-.22-.08-.38-.12-.55.12-.16.24-.63.79-.77.95-.14.16-.28.18-.52.06-.24-.12-1.02-.37-1.95-1.2-.72-.64-1.2-1.43-1.35-1.67-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.55-1.32-.75-1.8-.2-.48-.4-.41-.55-.42-.14-.01-.3-.01-.46-.01-.16 0-.42.06-.64.3-.22.24-.85.83-.85 2.02 0 1.19.87 2.34 1 2.5.12.16 1.71 2.61 4.14 3.66.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.1.47-.07 1.44-.59 1.64-1.15.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.46-.28z"/></svg>',
+  instagram: '<svg viewBox="0 0 24 24"><path d="M12 2c-2.72 0-3.06.01-4.12.06-1.06.05-1.79.22-2.43.47-.66.26-1.22.6-1.77 1.16-.56.55-.9 1.11-1.16 1.77-.25.64-.42 1.37-.47 2.43C2 8.94 2 9.28 2 12s.01 3.06.06 4.12c.05 1.06.22 1.79.47 2.43.26.66.6 1.22 1.16 1.77.55.56 1.11.9 1.77 1.16.64.25 1.37.42 2.43.47C8.94 22 9.28 22 12 22s3.06-.01 4.12-.06c1.06-.05 1.79-.22 2.43-.47.66-.26 1.22-.6 1.77-1.16.56-.55.9-1.11 1.16-1.77.25-.64.42-1.37.47-2.43.05-1.06.06-1.4.06-4.12s-.01-3.06-.06-4.12c-.05-1.06-.22-1.79-.47-2.43-.26-.66-.6-1.22-1.16-1.77-.55-.56-1.11-.9-1.77-1.16-.64-.25-1.37-.42-2.43-.47C15.06 2.01 14.72 2 12 2zm0 1.8c2.67 0 2.99.01 4.04.06.98.04 1.5.2 1.86.34.47.18.8.4 1.15.75.35.35.57.68.75 1.15.14.36.3.88.34 1.86.05 1.05.06 1.37.06 4.04s-.01 2.99-.06 4.04c-.04.98-.2 1.5-.34 1.86-.18.47-.4.8-.75 1.15-.35.35-.68.57-1.15.75-.36.14-.88.3-1.86.34-1.05.05-1.37.06-4.04.06s-2.99-.01-4.04-.06c-.98-.04-1.5-.2-1.86-.34-.47-.18-.8-.4-1.15-.75-.35-.35-.57-.68-.75-1.15-.14-.36-.3-.88-.34-1.86-.05-1.05-.06-1.37-.06-4.04s.01-2.99.06-4.04c.04-.98.2-1.5.34-1.86.18-.47.4-.8.75-1.15.35-.35.68-.57 1.15-.75.36-.14.88-.3 1.86-.34C9.01 3.81 9.33 3.8 12 3.8zm0 3.05a5.15 5.15 0 100 10.3 5.15 5.15 0 000-10.3zm0 8.5a3.35 3.35 0 110-6.7 3.35 3.35 0 010 6.7zm5.35-8.7a1.2 1.2 0 11-2.4 0 1.2 1.2 0 012.4 0z"/></svg>',
+  facebook: '<svg viewBox="0 0 24 24"><path d="M13.5 21v-7.9h2.66l.4-3.1h-3.06V8.1c0-.9.25-1.5 1.53-1.5h1.64V3.8c-.28-.04-1.26-.12-2.4-.12-2.37 0-4 1.44-4 4.09v2.23H7.6v3.1h2.67V21h3.23z"/></svg>',
+  x: '<svg viewBox="0 0 24 24"><path d="M18.9 3H21l-6.56 7.5L22.2 21h-6.1l-4.78-6.24L5.8 21H3.7l7.02-8.02L2.8 3h6.26l4.32 5.72L18.9 3zm-1.07 16.2h1.17L7.24 4.72H5.98L17.83 19.2z"/></svg>',
+  email: '<svg viewBox="0 0 24 24"><path d="M3 5h18a1 1 0 011 1v12a1 1 0 01-1 1H3a1 1 0 01-1-1V6a1 1 0 011-1zm1.4 2L12 12.5 19.6 7H4.4zM4 8.3V18h16V8.3l-8 5.7-8-5.7z"/></svg>',
+  phone: '<svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.3 2.6 3.4 4.7 6 6l2-2c.3-.3.7-.4 1.1-.2 1.2.4 2.5.6 3.8.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.8c.6 0 1 .4 1 1 0 1.3.2 2.6.6 3.8.1.4 0 .8-.2 1.1l-2 2z"/></svg>',
+  tiktok: '<svg viewBox="0 0 24 24"><path d="M14 3h2.2c.2 1.6 1.2 3 2.8 3.6v2.2c-1.1 0-2.1-.3-3-.9v5.9c0 3-2.4 5.2-5.2 5.2-1.5 0-2.9-.6-3.8-1.7A5.2 5.2 0 016 13.3c1-1.1 2.4-1.8 4-1.8.3 0 .6 0 .9.1v2.3a2.5 2.5 0 00-.9-.2 2.7 2.7 0 100 5.4 2.7 2.7 0 002.6-2.8V3z"/></svg>',
+  youtube: '<svg viewBox="0 0 24 24"><path d="M21.6 7.2s-.2-1.5-.8-2.1c-.8-.8-1.7-.8-2.1-.9C15.9 4 12 4 12 4s-3.9 0-6.7.2c-.4 0-1.3.1-2.1.9-.6.6-.8 2.1-.8 2.1S2.2 9 2.2 10.7v1.6c0 1.7.2 3.5.2 3.5s.2 1.5.8 2.1c.8.8 1.9.8 2.4.9 1.7.2 7.4.2 7.4.2s3.9 0 6.7-.2c.4 0 1.3-.1 2.1-.9.6-.6.8-2.1.8-2.1s.2-1.8.2-3.5v-1.6c0-1.7-.2-3.5-.2-3.5zM10 14.6V8.9l5.2 2.9-5.2 2.8z"/></svg>'
+};
+
+function el(tag, attrs, html){
+  const e = document.createElement(tag);
+  if (attrs) for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (html !== undefined) e.innerHTML = html;
+  return e;
+}
+
+function renderSocial(){
+  const container = document.getElementById('social-links');
+  container.innerHTML = '';
+  CONFIG.social.forEach(item => {
+    const icon = ICONS[item.platform] || ICONS.email;
+    const a = el('a', { href: item.url, target: '_blank', rel: 'noopener noreferrer', 'aria-label': item.platform }, icon);
+    container.appendChild(a);
+  });
+}
+
+function renderContact(){
+  const c = CONFIG.contact;
+  const list = document.getElementById('contact-list');
+  list.innerHTML = `
+    <li>${c.name}</li>
+    <li><a href="tel:${c.phone.replace(/\\s+/g,'')}">${c.phone}</a></li>
+    <li><a href="mailto:${c.email}">${c.email}</a></li>
+  `;
+}
+
+function renderBrand(){
+  document.title = CONFIG.brand.name + " — Bootcamp for Line Supervisors";
+  document.querySelectorAll('.brand span').forEach(s => s.textContent = CONFIG.brand.name);
+  document.getElementById('foot-tagline').textContent = CONFIG.brand.tagline;
+  document.getElementById('foot-location').textContent = CONFIG.brand.location;
+  document.getElementById('foot-year').textContent = '© ' + new Date().getFullYear() + ' ' + CONFIG.brand.name;
+}
+
+function renderCtas(){
+  const waUrl = 'https://wa.me/' + CONFIG.contact.whatsappNumber + '?text=' + encodeURIComponent(CONFIG.contact.whatsappMessage);
+  document.getElementById('pilot-cta').href = waUrl;
+  document.getElementById('nav-cta').href = waUrl;
+}
+
+function initMenu(){
+  const btn = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-links');
+  btn.addEventListener('click', () => {
+    const open = menu.style.display === 'flex';
+    menu.style.display = open ? 'none' : 'flex';
+    btn.setAttribute('aria-expanded', String(!open));
+  });
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { menu.style.display = 'none'; }));
+}
+
+renderBrand();
+renderContact();
+renderSocial();
+renderCtas();
+initMenu();
+</script>
+</body>
+</html>
